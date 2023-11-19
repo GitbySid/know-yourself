@@ -1,6 +1,6 @@
-import Navbar from './_components/navbar';
+import Navbar from '@/components/navbar';
 import PromptButton from './_components/prompt-button';
-import SearchBar from './_components/search-bar';
+import SearchBar from '@/components/search-bar';
 
 export default function AskPage() {
   const predefinedPrompts = [
