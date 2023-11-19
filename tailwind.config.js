@@ -11,12 +11,17 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-background': "url('/assets/background.svg')",
-        'button-background-1': "url('/assets/button-background-1.png')",
-        'button-background-2': "url('/assets/button-background-2.png')",
-        'button-background-3': "url('/assets/button-background-3.png')",
-        'button-background-4': "url('/assets/button-background-4.png')",
-        'button-background-5': "url('/assets/button-background-5.png')",
+        'gradient-background': "url('../public/assets/background.svg')",
+        'button-background-1':
+          "url('../public/assets/button-background-1.svg')",
+        'button-background-2':
+          "url('../public/assets/button-background-2.svg')",
+        'button-background-3':
+          "url('../public/assets/button-background-3.svg')",
+        'button-background-4':
+          "url('../public/assets/button-background-4.svg')",
+        'button-background-5':
+          "url('../public/assets/button-background-5.svg')",
       },
       colors: {
         primary: '#2169ac',
