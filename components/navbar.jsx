@@ -7,7 +7,7 @@ import { IoIosSettings } from 'react-icons/io';
 export default function Navbar() {
   // TODO: Add navigate functionality
   return (
-    <div className='flex w-full items-center justify-between bg-[#02051c] h-20 p-5 sm:px-24'>
+    <div className='flex fixed bottom-0 w-full items-center justify-between bg-[#02051c] h-20 p-5 sm:px-24'>
       <div className='flex flex-col items-center'>
         <FaSearch className='h-6 w-6 my-2' />
         <p>Search</p>

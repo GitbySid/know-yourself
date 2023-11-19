@@ -1,6 +1,4 @@
-import Navbar from '@/components/navbar';
 import PromptButton from './_components/prompt-button';
-import SearchBar from '@/components/search-bar';
 
 export default function AskPage() {
   const predefinedPrompts = [
@@ -37,9 +35,8 @@ export default function AskPage() {
   ];
 
   return (
-    <div className='flex flex-col h-screen'>
-      <SearchBar />
-      <div className='flex flex-col w-full h-full items-center gap-5 p-10'>
+    <div className='flex flex-col h-full'>
+      <div className='flex flex-col w-full items-center gap-5 p-10'>
         {predefinedPrompts.map((prompt) => (
           <PromptButton
             key={prompt.id}
@@ -48,7 +45,6 @@ export default function AskPage() {
           />
         ))}
       </div>
-      <Navbar />
     </div>
   );
 }
