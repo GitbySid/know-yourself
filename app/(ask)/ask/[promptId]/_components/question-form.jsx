@@ -13,7 +13,7 @@ export default function QuestionForm({ prompt }) {
 
   return (
     <>
-      <div className='flex flex-col bg-white text-black w-full h-full p-2 overflow-auto'>
+      <div className='flex flex-col bg-white text-black w-full h-full p-2 overflow-auto max-w-3xl'>
         <p className='text-center py-2'>{prompt.label}</p>
         <div className='my-5'>
           <p className='text-center bg-gray-400'>Answer Level</p>
@@ -86,7 +86,7 @@ export default function QuestionForm({ prompt }) {
         </div>
         <button className='py-3 mb-3 bg-gray-400 w-16 mx-auto'>Submit</button>
       </div>
-      <div className='flex flex-col my-5 bg-white text-black w-full h-full p-2 overflow-auto'>
+      <div className='flex flex-col my-5 bg-white text-black w-full h-full p-2 overflow-auto max-w-3xl'>
         <div className='bg-gray-400 py-2 my-2'>
           <p className='text-center'>{'"Whiplash" (2014) - Short Version'}</p>
           <p className='text-center'>

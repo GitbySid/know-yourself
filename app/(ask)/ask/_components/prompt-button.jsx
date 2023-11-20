@@ -26,7 +26,7 @@ export default function PromptButton({ id, label }) {
       style={{
         backgroundImage: `url(${bgMap[id].src})`,
       }}
-      className='my-5 mx-2 p-5 w-full bg-no-repeat bg-cover bg-center rounded-full'
+      className='my-5 mx-2 p-5 w-full max-w-3xl bg-no-repeat bg-cover bg-center rounded-full'
       onClick={handlePromptClick}
     >
       {label}
