@@ -1,9 +1,9 @@
 import { twMerge } from 'tailwind-merge';
-import { Inter } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import './globals.css';
 import PromptContextProvider from '@/contexts/PromptProvider';
 
-const inter = Inter({ subsets: ['latin'] });
+const raleway = Raleway({ subsets: ['latin'] });
 
 // TODO: Add description
 export const metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body
         className={twMerge(
           'bg-gradient-background bg-no-repeat bg-cover',
-          inter.className
+          raleway.className
         )}
       >
         <PromptContextProvider>{children}</PromptContextProvider>
