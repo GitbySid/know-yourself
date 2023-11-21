@@ -1,6 +1,36 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { SlLike, SlDislike, SlShare } from 'react-icons/sl';
+import { twMerge } from 'tailwind-merge';
+import { ImSpinner10 } from 'react-icons/im';
 
 export default function QuestionForm({ prompt }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [promptData, setPromptData] = useState({});
+  const [selectedChoice1, setSelectedChoice1] = useState('');
+  const [selectedChoice2, setSelectedChoice2] = useState('');
+  const [selectedChoice3, setSelectedChoice3] = useState('');
+  const [answer4, setAnswer4] = useState('');
+  const [answer5, setAnswer5] = useState('');
+
+  useEffect(() => {
+    const getPromptData = async (label) => {
+      axios
+        .post('/api/prompt', { label })
+        .then((res) => {
+          setPromptData(res.data);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsError(true);
+        });
+    };
+    getPromptData(prompt?.label);
+  }, [prompt?.label]);
+
   const handleDislike = () => {
     // TODO: Add OnClick
   };
@@ -11,79 +41,105 @@ export default function QuestionForm({ prompt }) {
     // TODO: Add OnClick
   };
 
-  return (
+  if (isError) {
+    return (
+      <div className='flex items-center justify-center h-[500px] sm:h-[700px] px-20 text-xl text-center mb-80 bg-orange-light'>
+        Something went wrong!
+      </div>
+    );
+  }
+
+  return isLoading ? (
+    <div className='flex items-center justify-center h-[500px] w-full max-w-3xl sm:h-[700px] bg-orange-light'>
+      <ImSpinner10 className='animate-spin w-24 h-24' />
+    </div>
+  ) : (
     <>
       <div className='flex flex-col bg-orange-light text-white text-lg w-full h-full p-2 overflow-auto max-w-3xl'>
-        <p className='text-center py-2'>{prompt.label}</p>
+        <p className='text-center py-2'>{promptData?.label}</p>
         <div className='my-5'>
-          <p className='text-center bg-orange-medium'>Answer Level</p>
+          <p className='text-center bg-orange-medium'>
+            {promptData?.question1?.question}
+          </p>
           <div className='flex gap-2 justify-between my-2'>
-            <button className='text-center bg-orange-medium w-full py-5'>
-              Broad
-            </button>
-            <button className='text-center bg-orange-medium w-full py-5'>
-              Medium
-            </button>
-            <button className='text-center bg-orange-medium w-full py-5'>
-              Specific
-            </button>
+            {promptData?.question1?.choices?.map((choice, index) => (
+              <button
+                key={index}
+                className={twMerge(
+                  'text-center w-full py-5',
+                  selectedChoice1 === choice
+                    ? 'bg-orange-dark'
+                    : 'bg-orange-medium'
+                )}
+                onClick={() => setSelectedChoice1(choice)}
+              >
+                {choice}
+              </button>
+            ))}
           </div>
         </div>
         <div className='my-5'>
           <p className='text-center bg-orange-medium'>
-            How are you feeling right now?
+            {promptData?.question2?.question}
           </p>
           <div className='flex flex-col gap-1 justify-between my-3'>
-            <button className='text-center bg-orange-medium w-full'>
-              A) Excited and Energetic
-            </button>
-            <button className='text-center bg-orange-medium w-full'>
-              B) Melancholic or Thoughtful
-            </button>
-            <button className='text-center bg-orange-medium w-full'>
-              C) Relaxed or Chill
-            </button>
-            <button className='text-center bg-orange-medium w-full'>
-              D) Curious and Adventurous
-            </button>
+            {promptData?.question2?.choices?.map((choice, index) => (
+              <button
+                key={index}
+                className={twMerge(
+                  'text-center w-full',
+                  selectedChoice2 === choice
+                    ? 'bg-orange-dark'
+                    : 'bg-orange-medium'
+                )}
+                onClick={() => setSelectedChoice2(choice)}
+              >
+                {choice}
+              </button>
+            ))}
           </div>
         </div>
         <div className='my-5'>
           <p className='text-center bg-orange-medium'>
-            What genre are you in the mood for?
+            {promptData?.question3?.question}
           </p>
           <div className='flex flex-col gap-1 justify-between my-3'>
-            <button className='text-center bg-orange-medium w-full'>
-              A) Action/Adventure
-            </button>
-            <button className='text-center bg-orange-medium w-full'>
-              B) Drama
-            </button>
-            <button className='text-center bg-orange-medium w-full'>
-              C) Comedy
-            </button>
-            <button className='text-center bg-orange-medium w-full'>
-              D) Mystery/Thriller
-            </button>
+            {promptData?.question3?.choices?.map((choice, index) => (
+              <button
+                key={index}
+                className={twMerge(
+                  'text-center w-full',
+                  selectedChoice3 === choice
+                    ? 'bg-orange-dark'
+                    : 'bg-orange-medium'
+                )}
+                onClick={() => setSelectedChoice3(choice)}
+              >
+                {choice}
+              </button>
+            ))}
           </div>
         </div>
         <div className='my-5'>
           <p className='text-center bg-orange-medium'>
-            What was the last movie you enjoyed and why did you like it?
+            {promptData?.question4?.question}
           </p>
           <input
             className='bg-orange-medium w-full text-white outline-none my-3 px-3 py-2 placeholder:text-white'
             placeholder='Text...'
+            value={answer4}
+            onChange={(e) => setAnswer4(e.target.value)}
           />
         </div>
         <div className='my-5'>
           <p className='text-center bg-orange-medium'>
-            Is there a specific theme you're interested in tonight (
-            friendship,space, historical events, etc.)?
+            {promptData?.question5?.question}
           </p>
           <input
             className='bg-orange-medium w-full text-white outline-none my-3 px-3 py-2 placeholder:text-white'
             placeholder='Text...'
+            value={answer5}
+            onChange={(e) => setAnswer5(e.target.value)}
           />
         </div>
         <button className='p-3 mb-3 bg-orange-dark mx-auto'>Submit</button>
@@ -92,21 +148,21 @@ export default function QuestionForm({ prompt }) {
         <div className='bg-orange-medium py-2 my-2'>
           <p className='text-center'>{'"Whiplash" (2014) - Short Version'}</p>
           <p className='text-center'>
-            Why: While not exactly anaction/adventure film, "Whiplash" is
+            {`Why: While not exactly anaction/adventure film, "Whiplash" is
             extremely intense andenergetic, almost like an action movie but set
             in a music school.The movie also tackles the themeof people chasing
-            their dreams atgreat personal cost.
+            their dreams atgreat personal cost.`}
           </p>
         </div>
         <div className='bg-orange-medium py-2'>
           <p className='text-center'>{"'Kung Fu Panda'(2008)"}</p>
           <p className='text-center'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem
+            {`Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem
             perspiciatis explicabo obcaecati fugiat aspernatur soluta accusamus
             voluptatum exercitationem alias aliquam hic aut autem, libero
             consequatur mollitia, enim, ducimus necessitatibus debitis laborum!
             Recusandae earum officia voluptatibus debitis dolore unde inventore
-            obcaecati!
+            obcaecati!`}
           </p>
         </div>
         <div className='flex mt-8 mb-4 justify-evenly'>
