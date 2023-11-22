@@ -13,10 +13,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
+    <html lang='en' className='light'>
       <body
         className={twMerge(
-          'bg-gradient-background bg-no-repeat bg-cover',
+          'bg-gradient-background bg-no-repeat bg-cover text-white',
           raleway.className
         )}
       >
