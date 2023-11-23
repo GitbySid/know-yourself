@@ -9,29 +9,32 @@ export const PromptContextProvider = ({ children }) => {
     {
       id: '1',
       label: 'What movie to watch?',
+      backgroundColor: 'orange',
     },
     {
       id: '2',
       label: 'What to eat for dinner?',
+      backgroundColor: 'green',
     },
     {
       id: '3',
       label: 'What sport to play?',
+      backgroundColor: 'purple',
     },
     {
       id: '4',
       label: 'What board game to play?',
+      backgroundColor: 'yellow',
     },
     {
       id: '5',
       label: 'Where to go for a weekend getaway?',
+      backgroundColor: 'pink',
     },
   ];
 
   const getPredefinedPrompt = (promptId) => {
-    return predefinedPrompts.find((item) => {
-      return item.id === promptId;
-    });
+    return predefinedPrompts.find((item) => item.id === promptId);
   };
 
   return (
