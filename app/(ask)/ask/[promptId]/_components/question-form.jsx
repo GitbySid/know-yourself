@@ -6,6 +6,30 @@ import { SlLike, SlDislike, SlShare } from 'react-icons/sl';
 import { twMerge } from 'tailwind-merge';
 import { ImSpinner10 } from 'react-icons/im';
 
+const PROMPT_TO_LIGHT_CLASS_MAP = {
+  orange: 'bg-orange-light',
+  green: 'bg-green-light',
+  purple: 'bg-purple-light',
+  yellow: 'bg-yellow-light',
+  pink: 'bg-pink-light',
+};
+
+const PROMPT_TO_MEDIUM_CLASS_MAP = {
+  orange: 'bg-orange-medium',
+  green: 'bg-green-medium',
+  purple: 'bg-purple-medium',
+  yellow: 'bg-yellow-medium',
+  pink: 'bg-pink-medium',
+};
+
+const PROMPT_TO_DARK_CLASS_MAP = {
+  orange: 'bg-orange-dark',
+  green: 'bg-green-dark',
+  purple: 'bg-purple-dark',
+  yellow: 'bg-yellow-dark',
+  pink: 'bg-pink-dark',
+};
+
 export default function QuestionForm({ prompt }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -46,11 +70,7 @@ export default function QuestionForm({ prompt }) {
       <div
         className={twMerge(
           'flex items-center justify-center h-[500px] sm:h-[700px] px-20 text-xl text-center mb-80',
-          prompt?.backgroundColor === 'orange' && 'bg-orange-light',
-          prompt?.backgroundColor === 'green' && 'bg-green-light',
-          prompt?.backgroundColor === 'purple' && 'bg-purple-light',
-          prompt?.backgroundColor === 'yellow' && 'bg-yellow-light',
-          prompt?.backgroundColor === 'pink' && 'bg-pink-light'
+          PROMPT_TO_LIGHT_CLASS_MAP[prompt?.backgroundColor]
         )}
       >
         Something went wrong!
@@ -62,11 +82,7 @@ export default function QuestionForm({ prompt }) {
     <div
       className={twMerge(
         'flex items-center justify-center h-[500px] w-full max-w-3xl sm:h-[700px]',
-        prompt?.backgroundColor === 'orange' && 'bg-orange-light',
-        prompt?.backgroundColor === 'green' && 'bg-green-light',
-        prompt?.backgroundColor === 'purple' && 'bg-purple-light',
-        prompt?.backgroundColor === 'yellow' && 'bg-yellow-light',
-        prompt?.backgroundColor === 'pink' && 'bg-pink-light'
+        PROMPT_TO_LIGHT_CLASS_MAP[prompt?.backgroundColor]
       )}
     >
       <ImSpinner10 className='animate-spin w-24 h-24' />
@@ -76,11 +92,7 @@ export default function QuestionForm({ prompt }) {
       <div
         className={twMerge(
           'flex flex-col  text-white text-lg w-full h-full p-2 overflow-auto max-w-3xl',
-          prompt?.backgroundColor === 'orange' && 'bg-orange-light',
-          prompt?.backgroundColor === 'green' && 'bg-green-light',
-          prompt?.backgroundColor === 'purple' && 'bg-purple-light',
-          prompt?.backgroundColor === 'yellow' && 'bg-yellow-light',
-          prompt?.backgroundColor === 'pink' && 'bg-pink-light'
+          PROMPT_TO_LIGHT_CLASS_MAP[prompt?.backgroundColor]
         )}
       >
         <p className='text-center py-2'>{promptData?.label}</p>
@@ -88,11 +100,7 @@ export default function QuestionForm({ prompt }) {
           <p
             className={twMerge(
               'text-center',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
           >
             {promptData?.question1?.question}
@@ -103,26 +111,9 @@ export default function QuestionForm({ prompt }) {
                 key={index}
                 className={twMerge(
                   'text-center w-full py-5',
-                  prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-                  prompt?.backgroundColor === 'green' && 'bg-green-medium',
-                  prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-                  prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-                  prompt?.backgroundColor === 'pink' && 'bg-pink-medium',
-                  selectedChoice1 === choice &&
-                    prompt?.backgroundColor === 'orange' &&
-                    'bg-orange-dark',
-                  selectedChoice1 === choice &&
-                    prompt?.backgroundColor === 'green' &&
-                    'bg-green-dark',
-                  selectedChoice1 === choice &&
-                    prompt?.backgroundColor === 'purple' &&
-                    'bg-purple-dark',
-                  selectedChoice1 === choice &&
-                    prompt?.backgroundColor === 'yellow' &&
-                    'bg-yellow-dark',
-                  selectedChoice1 === choice &&
-                    prompt?.backgroundColor === 'pink' &&
-                    'bg-pink-dark'
+                  selectedChoice1 === choice
+                    ? PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
+                    : PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
                 )}
                 onClick={() => setSelectedChoice1(choice)}
               >
@@ -135,11 +126,7 @@ export default function QuestionForm({ prompt }) {
           <p
             className={twMerge(
               'text-center',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
           >
             {promptData?.question2?.question}
@@ -150,26 +137,9 @@ export default function QuestionForm({ prompt }) {
                 key={index}
                 className={twMerge(
                   'text-center w-full',
-                  prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-                  prompt?.backgroundColor === 'green' && 'bg-green-medium',
-                  prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-                  prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-                  prompt?.backgroundColor === 'pink' && 'bg-pink-medium',
-                  selectedChoice2 === choice &&
-                    prompt?.backgroundColor === 'orange' &&
-                    'bg-orange-dark',
-                  selectedChoice2 === choice &&
-                    prompt?.backgroundColor === 'green' &&
-                    'bg-green-dark',
-                  selectedChoice2 === choice &&
-                    prompt?.backgroundColor === 'purple' &&
-                    'bg-purple-dark',
-                  selectedChoice2 === choice &&
-                    prompt?.backgroundColor === 'yellow' &&
-                    'bg-yellow-dark',
-                  selectedChoice2 === choice &&
-                    prompt?.backgroundColor === 'pink' &&
-                    'bg-pink-dark'
+                  selectedChoice2 === choice
+                    ? PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
+                    : PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
                 )}
                 onClick={() => setSelectedChoice2(choice)}
               >
@@ -182,11 +152,7 @@ export default function QuestionForm({ prompt }) {
           <p
             className={twMerge(
               'text-center',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
           >
             {promptData?.question3?.question}
@@ -197,26 +163,9 @@ export default function QuestionForm({ prompt }) {
                 key={index}
                 className={twMerge(
                   'text-center w-full',
-                  prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-                  prompt?.backgroundColor === 'green' && 'bg-green-medium',
-                  prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-                  prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-                  prompt?.backgroundColor === 'pink' && 'bg-pink-medium',
-                  selectedChoice3 === choice &&
-                    prompt?.backgroundColor === 'orange' &&
-                    'bg-orange-dark',
-                  selectedChoice3 === choice &&
-                    prompt?.backgroundColor === 'green' &&
-                    'bg-green-dark',
-                  selectedChoice3 === choice &&
-                    prompt?.backgroundColor === 'purple' &&
-                    'bg-purple-dark',
-                  selectedChoice3 === choice &&
-                    prompt?.backgroundColor === 'yellow' &&
-                    'bg-yellow-dark',
-                  selectedChoice3 === choice &&
-                    prompt?.backgroundColor === 'pink' &&
-                    'bg-pink-dark'
+                  selectedChoice3 === choice
+                    ? PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
+                    : PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
                 )}
                 onClick={() => setSelectedChoice3(choice)}
               >
@@ -229,11 +178,7 @@ export default function QuestionForm({ prompt }) {
           <p
             className={twMerge(
               'text-center',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
           >
             {promptData?.question4?.question}
@@ -241,11 +186,7 @@ export default function QuestionForm({ prompt }) {
           <input
             className={twMerge(
               'w-full text-white outline-none my-3 px-3 py-2 placeholder:text-white',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
             placeholder='Text...'
             value={answer4}
@@ -256,11 +197,7 @@ export default function QuestionForm({ prompt }) {
           <p
             className={twMerge(
               'text-center',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
           >
             {promptData?.question5?.question}
@@ -268,11 +205,7 @@ export default function QuestionForm({ prompt }) {
           <input
             className={twMerge(
               'w-full text-white outline-none my-3 px-3 py-2 placeholder:text-white',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-              prompt?.backgroundColor === 'green' && 'bg-green-medium',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+              PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
             )}
             placeholder='Text...'
             value={answer5}
@@ -282,11 +215,7 @@ export default function QuestionForm({ prompt }) {
         <button
           className={twMerge(
             'p-3 mb-3 mx-auto',
-            prompt?.backgroundColor === 'orange' && 'bg-orange-dark',
-            prompt?.backgroundColor === 'green' && 'bg-green-dark',
-            prompt?.backgroundColor === 'purple' && 'bg-purple-dark',
-            prompt?.backgroundColor === 'yellow' && 'bg-yellow-dark',
-            prompt?.backgroundColor === 'pink' && 'bg-pink-dark'
+            PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
           )}
         >
           Submit
@@ -295,21 +224,13 @@ export default function QuestionForm({ prompt }) {
       <div
         className={twMerge(
           'flex flex-col my-5  text-white text-lg w-full h-full p-2 overflow-auto max-w-3xl',
-          prompt?.backgroundColor === 'orange' && 'bg-orange-light',
-          prompt?.backgroundColor === 'green' && 'bg-green-light',
-          prompt?.backgroundColor === 'purple' && 'bg-purple-light',
-          prompt?.backgroundColor === 'yellow' && 'bg-yellow-light',
-          prompt?.backgroundColor === 'pink' && 'bg-pink-light'
+          PROMPT_TO_LIGHT_CLASS_MAP[prompt?.backgroundColor]
         )}
       >
         <div
           className={twMerge(
             ' py-2 my-2',
-            prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-            prompt?.backgroundColor === 'green' && 'bg-green-medium',
-            prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-            prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-            prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+            PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
           )}
         >
           <p className='text-center'>{'"Whiplash" (2014) - Short Version'}</p>
@@ -323,11 +244,7 @@ export default function QuestionForm({ prompt }) {
         <div
           className={twMerge(
             ' py-2',
-            prompt?.backgroundColor === 'orange' && 'bg-orange-medium',
-            prompt?.backgroundColor === 'green' && 'bg-green-medium',
-            prompt?.backgroundColor === 'purple' && 'bg-purple-medium',
-            prompt?.backgroundColor === 'yellow' && 'bg-yellow-medium',
-            prompt?.backgroundColor === 'pink' && 'bg-pink-medium'
+            PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
           )}
         >
           <p className='text-center'>{"'Kung Fu Panda'(2008)"}</p>
@@ -344,11 +261,7 @@ export default function QuestionForm({ prompt }) {
           <button
             className={twMerge(
               'flex gap-2 justify-evenly items-center py-3 px-2 w-[100px]',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-dark',
-              prompt?.backgroundColor === 'green' && 'bg-green-dark',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-dark',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-dark',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-dark'
+              PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
             )}
             onClick={handleDislike}
           >
@@ -358,11 +271,7 @@ export default function QuestionForm({ prompt }) {
           <button
             className={twMerge(
               'flex gap-2 justify-evenly items-center py-3 px-2 w-[100px]',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-dark',
-              prompt?.backgroundColor === 'green' && 'bg-green-dark',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-dark',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-dark',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-dark'
+              PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
             )}
             onClick={handleLike}
           >
@@ -372,11 +281,7 @@ export default function QuestionForm({ prompt }) {
           <button
             className={twMerge(
               'flex gap-2 justify-evenly items-center py-3 px-2 w-[100px]',
-              prompt?.backgroundColor === 'orange' && 'bg-orange-dark',
-              prompt?.backgroundColor === 'green' && 'bg-green-dark',
-              prompt?.backgroundColor === 'purple' && 'bg-purple-dark',
-              prompt?.backgroundColor === 'yellow' && 'bg-yellow-dark',
-              prompt?.backgroundColor === 'pink' && 'bg-pink-dark'
+              PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor]
             )}
             onClick={handleShare}
           >
