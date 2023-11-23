@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <div className='flex fixed bottom-0 w-full items-center justify-between bg-[#02051c] h-20 p-5 sm:px-24'>
-      <Link className='flex flex-col items-center' href='/'>
+      <Link className='flex flex-col items-center' href='/ask'>
         <FaHome className='h-6 w-6 my-2' />
         <p>Home</p>
       </Link>
