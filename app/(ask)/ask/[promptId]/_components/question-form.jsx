@@ -5,6 +5,8 @@ import axios from 'axios';
 import { SlLike, SlDislike, SlShare } from 'react-icons/sl';
 import { twMerge } from 'tailwind-merge';
 import { ImSpinner10 } from 'react-icons/im';
+import { BiMessageAltDetail } from 'react-icons/bi';
+import { IoIosSend } from 'react-icons/io';
 
 const PROMPT_TO_LIGHT_CLASS_MAP = {
   orange: 'bg-orange-light',
@@ -39,6 +41,7 @@ export default function QuestionForm({ prompt }) {
   const [selectedChoice3, setSelectedChoice3] = useState('');
   const [answer4, setAnswer4] = useState('');
   const [answer5, setAnswer5] = useState('');
+  const [feedback, setFeedback] = useState('');
 
   useEffect(() => {
     const getPromptData = async (label) => {
@@ -58,10 +61,16 @@ export default function QuestionForm({ prompt }) {
   const handleDislike = () => {
     // TODO: Add OnClick
   };
+
   const handleLike = () => {
     // TODO: Add OnClick
   };
+
   const handleShare = () => {
+    // TODO: Add OnClick
+  };
+
+  const handleFeedback = () => {
     // TODO: Add OnClick
   };
 
@@ -289,6 +298,45 @@ export default function QuestionForm({ prompt }) {
             <p>Share</p>
           </button>
         </div>
+      </div>
+      <div
+        className={twMerge(
+          'flex flex-col items-center text-white text-lg w-full h-full p-2 overflow-auto max-w-3xl',
+          PROMPT_TO_LIGHT_CLASS_MAP[prompt?.backgroundColor]
+        )}
+      >
+        <div
+          className={twMerge(
+            'flex gap-2 justify-center items-center py-3 px-2 hover:bg max w-full',
+            PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
+          )}
+        >
+          <BiMessageAltDetail />
+          <p>Give Feedback</p>
+        </div>
+        <textarea
+          name='feedback'
+          id='feedback'
+          cols='30'
+          rows='5'
+          className={twMerge(
+            'w-full text-white outline-none my-3 px-3 py-2 placeholder:text-white',
+            PROMPT_TO_MEDIUM_CLASS_MAP[prompt?.backgroundColor]
+          )}
+          value={feedback}
+          onChange={(e) => setFeedback(e.target.value)}
+        />
+        <button
+          className={twMerge(
+            'flex gap-2 justify-evenly items-center py-3 px-2 w-[100px]',
+            PROMPT_TO_DARK_CLASS_MAP[prompt?.backgroundColor],
+            'peer-checked:h-[200px] peer-checked:overflow-scroll transition-[height] duration-1000 ease-in-out'
+          )}
+          onClick={handleFeedback}
+        >
+          <IoIosSend />
+          <p>Send</p>
+        </button>
       </div>
     </>
   );
