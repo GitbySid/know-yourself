@@ -49,16 +49,16 @@ export default function HomePage() {
       </div>
       <div className='flex h-[20%] gap-5 p-5'>
         <button
-          className='flex gap-2 items-center justify-center border border-white rounded-md p-3 hover:bg-white hover:text-black transition-all w-[100px] h-[50px]'
+          className='flex gap-2 items-center justify-center border border-white rounded-md p-3 hover:bg-white hover:text-black transition-all h-[50px]'
           onClick={login}
         >
           Login <FiLogIn />
         </button>
         <button
-          className='flex gap-2 items-center justify-center border border-white rounded-md p-3 hover:bg-white hover:text-black transition-all w-[100px] h-[50px]'
+          className='flex gap-2 items-center justify-center border border-white rounded-md p-3 hover:bg-white hover:text-black transition-all h-[50px]'
           onClick={skip}
         >
-          Skip <FiSkipForward />
+          Use as Guest <FiSkipForward />
         </button>
       </div>
     </main>
