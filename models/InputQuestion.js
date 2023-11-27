@@ -12,6 +12,5 @@ const InputQuestionSchema = new mongoose.Schema(
   }
 );
 
-module.exports =
-  mongoose.models.InputQuestion ||
+export default mongoose.models.InputQuestion ||
   mongoose.model('InputQuestion', InputQuestionSchema);

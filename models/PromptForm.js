@@ -17,5 +17,5 @@ const PromptFormSchema = new mongoose.Schema(
   }
 );
 
-module.exports =
-  mongoose.models.PromptForm || mongoose.model('PromptForm', PromptFormSchema);
+export default mongoose.models.PromptForm ||
+  mongoose.model('PromptForm', PromptFormSchema);

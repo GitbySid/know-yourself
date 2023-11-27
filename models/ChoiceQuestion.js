@@ -13,6 +13,5 @@ const ChoiceQuestionSchema = new mongoose.Schema(
   }
 );
 
-module.exports =
-  mongoose.models.ChoiceQuestion ||
+export default mongoose.models.ChoiceQuestion ||
   mongoose.model('ChoiceQuestion', ChoiceQuestionSchema);
