@@ -1,12 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
+import useSWR from 'swr';
 import { SlLike, SlDislike, SlShare } from 'react-icons/sl';
 import { twMerge } from 'tailwind-merge';
 import { ImSpinner10 } from 'react-icons/im';
 import { BiMessageAltDetail } from 'react-icons/bi';
 import { IoIosSend } from 'react-icons/io';
+
+import { PromptContext } from '@/contexts/PromptProvider';
 
 const PROMPT_TO_LIGHT_CLASS_MAP = {
   orange: 'bg-orange-light',
@@ -32,10 +35,10 @@ const PROMPT_TO_DARK_CLASS_MAP = {
   pink: 'bg-pink-dark',
 };
 
-export default function QuestionForm({ prompt }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [promptData, setPromptData] = useState({});
+export default function QuestionForm({ promptId }) {
+  const { getPredefinedPrompt } = useContext(PromptContext);
+  const prompt = getPredefinedPrompt(promptId);
+
   const [selectedChoice1, setSelectedChoice1] = useState('');
   const [selectedChoice2, setSelectedChoice2] = useState('');
   const [selectedChoice3, setSelectedChoice3] = useState('');
@@ -43,20 +46,13 @@ export default function QuestionForm({ prompt }) {
   const [answer5, setAnswer5] = useState('');
   const [feedback, setFeedback] = useState('');
 
-  useEffect(() => {
-    const getPromptData = async (label) => {
-      axios
-        .post('/api/prompt', { label })
-        .then((res) => {
-          setPromptData(res.data);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setIsError(true);
-        });
-    };
-    getPromptData(prompt?.label);
-  }, [prompt?.label]);
+  const getPromptData = async (url) => axios.get(url).then((res) => res.data);
+
+  const {
+    data: promptData,
+    error,
+    isLoading,
+  } = useSWR(`/api/prompt?promptId=${promptId}`, getPromptData);
 
   const handleDislike = () => {
     // TODO: Add OnClick
@@ -74,7 +70,7 @@ export default function QuestionForm({ prompt }) {
     // TODO: Add OnClick
   };
 
-  if (isError) {
+  if (error) {
     return (
       <div
         className={twMerge(

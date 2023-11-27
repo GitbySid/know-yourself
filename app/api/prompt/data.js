@@ -191,8 +191,6 @@ export const predefinedPrompts = [
   },
 ];
 
-export const getPredefinedPrompt = (label) => {
-  return predefinedPrompts.find((item) => {
-    return label === item.label;
-  });
+export const getPredefinedPrompt = (promptId) => {
+  return predefinedPrompts.find((item) => promptId === item.id + '');
 };
